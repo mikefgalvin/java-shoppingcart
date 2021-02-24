@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -16,10 +15,12 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter
 {
     // client id = username for the application / client
-    static final String CLIENT_ID = System.getenv("lambda-client");
-    static final String CLIENT_SECRET = System.getenv("lambda-secret");
+//    static final String CLIENT_ID = System.getenv("lambda-client");
+//    static final String CLIENT_SECRET = System.getenv("lambda-secret");
 //    static final String CLIENT_ID = System.getenv("OAUTHCLIENTID");
+    static final String CLIENT_ID = "lambda-client";
 //    static final String CLIENT_SECRET = System.getenv("OAUTHCLIENTSECRET");
+    static final String CLIENT_SECRET = "lambda-secret";
     static final String GRANT_TYPE_PASSWORD = "password";
     static final String AUTHORIZATION_CODE = "authorization_code";
     static final String SCOPE_READ = "read";
@@ -48,7 +49,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception
     {
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager);

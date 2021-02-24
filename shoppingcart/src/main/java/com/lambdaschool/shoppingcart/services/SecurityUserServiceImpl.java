@@ -15,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class SecurityUserServiceImpl implements UserDetailsService
 {
     @Autowired
-    private UserRepository userRepos;
+    private UserRepository userrepos;
 
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
     {
-        User user = userRepos.findByUsername(s.toLowerCase());
+        User user = userrepos.findByUsername(s.toLowerCase());
         if (user == null)
         {
             throw new ResourceNotFoundException("Invalid username or password");
